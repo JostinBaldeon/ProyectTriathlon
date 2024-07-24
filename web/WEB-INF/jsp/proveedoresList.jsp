@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Categorias de Productos</title>
+        <title>Lista de Proveedores</title>
 
         <!-- Custom fonts for this template -->
         <link href="Resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -35,9 +35,9 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.htm">
                     <div class="sidebar-brand-icon ">
-                        <img src="Resources/img/logo.png" weight="26px" height="12px" alt="alt"/>
+                        <img src="Resources/img/logo.png" weight="52px" height="24px" alt="alt"/>
                     </div>
                 </a>
                 <!-- Divider -->
@@ -45,20 +45,20 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="../index.jsp">
+                    <a class="nav-link" href="index.htm">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="productosList.jsp">
+                    <a class="nav-link" href="productosList.htm">
                         <i class="fas fa-box"></i>
                         <span>Productos</span></a>
                 </li>
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item active">
-                    <a class="nav-link collapsed" href="proveedoresList.jsp">
+                    <a class="nav-link collapsed" href="proveedoresList.htm">
                         <i class="fas fa-handshake"></i>
                         <span>Proveedores</span>
                     </a>
@@ -66,7 +66,7 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="stocksList.jsp">
+                    <a class="nav-link collapsed" href="stocksList.htm">
                         <i class="fas fa-warehouse"></i>
                         <span>Stock</span>
                     </a>
@@ -82,7 +82,7 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="entradaList.jsp">
+                    <a class="nav-link collapsed" href="entradaList.htm">
                         <i class="fas fa-arrow-right"></i>
                         <span>Entrada</span>
                     </a>
@@ -90,7 +90,7 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="salidaList.jsp">
+                    <a class="nav-link collapsed" href="salidaList.htm">
                         <i class="fas fa-arrow-left"></i>
                         <span>Salida</span>
                     </a>
@@ -204,7 +204,7 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header d-sm-flex align-items-center justify-content-between mb-4">
-                                <h6 class="m-0 font-weight-bold text-gray-800">Lista de Categorias de Productos</h6>
+                                <h6 class="m-0 font-weight-bold text-gray-800">Lista de Proveedores</h6>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalGuardar">
                                     <i
@@ -216,7 +216,7 @@
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus fa-sm text-black-50"></i> Agregar Categoria</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus fa-sm text-black-50"></i> Agregar Proveedor</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -225,31 +225,47 @@
                                                 <div class="container">
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <form>
+                                                            <form action="agregarProveedor.htm" method="GET">
                                                                 <p>
-                                                                    <label for="exampleFormControlInput1">Nombre:</label>
-                                                                    <input type="text" class="form-control" name="">
+                                                                    <label for="nombreInput">Nombre:</label>
+                                                                    <input type="text" id="nombreInput" name="nom_prov" class="form-control">
                                                                 </p>
-
+                                                                <p>
+                                                                    <label for="numContInput">Numero de Contacto:</label>
+                                                                    <input type="text" id="numContInput" name="num_cont_prov" class="form-control">
+                                                                </p>
+                                                                <p>
+                                                                    <label for="fechaInput">Fecha de Creacion:</label>
+                                                                    <input type="date" id="fechaInput" name="fecha_creac_prov" class="form-control">
+                                                                </p>
+                                                                <p>
+                                                                    <label for="persContInput">Persona de Contacto:</label>
+                                                                    <input type="text" id="persContInput" name="pers_cont_prov" class="form-control">
+                                                                </p>
+                                                                <p>
+                                                                    <label for="correoContInput">Correo de Contacto:</label>
+                                                                    <input type="email" id="correoContInput" name="correo_cont_prov" class="form-control">
+                                                                </p>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                                </div>
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
 
                                 <!-- Modal para editar -->
                                 <div class="modal fade" id="exampleModalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus fa-sm text-black-50"></i> Editar Categoria</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus fa-sm text-black-50"></i> Editar Proveedor</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -258,43 +274,71 @@
                                                 <div class="container">
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <form id="editForm">
+                                                            <form id="editForm" >
+
                                                                 <p>
                                                                     <label for="nombreInput">Nombre:</label>
-                                                                    <input type="text" id="nombreInput" name="nombre" class="form-control">
+                                                                    <input type="text" id="nom_prov" name="nom_prov" class="form-control">
                                                                 </p>
-                                                                <input type="hidden" id="idInput" name="id">
+                                                                <p>
+                                                                    <label for="numContInput">Numero de Contacto:</label>
+                                                                    <input type="text" id="num_cont_prov" name="num_cont_prov" class="form-control">
+                                                                </p>
+                                                                <p>
+                                                                    <label for="fechaInput">Fecha de Creacion:</label>
+                                                                    <input type="date" id="fecha_creac_prov" name="fecha_creac_prov" class="form-control">
+                                                                </p>
+                                                                <p>
+                                                                    <label for="persContInput">Persona de Contacto:</label>
+                                                                    <input type="text" id="pers_cont_prov" name="pers_cont_prov" class="form-control">
+                                                                </p>
+                                                                <p>
+                                                                    <label for="correoContInput">Correo de Contacto:</label>
+                                                                    <input type="email" id="correo_cont_prov" name="correo_cont_prov" class="form-control">
+                                                                </p>
+                                                                <input type="hidden" id="id_prov" name="id_prov">
+
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary" onclick="guardarEdicion()">Guardar</button>
+                                                <button type="button" class="btn btn-primary" onclick="guardarEdicion()"> Guardar </button>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <script>
-                                    function abrirModalEditar(id, nombre) {
-                                        document.getElementById('idInput').value = id;
-                                        document.getElementById('nombreInput').value = nombre;
 
+                                <script>
+                                    function abrirModalEditar(id_prov, nom_prov, num_cont_prov, fecha_creac_prov, pers_cont_prov, correo_cont_prov) {
+                                        document.getElementById('id_prov').value = id_prov;
+                                        document.getElementById('nom_prov').value = nom_prov;
+                                        document.getElementById('num_cont_prov').value = num_cont_prov;
+                                        document.getElementById('fecha_creac_prov').value = fecha_creac_prov;
+                                        document.getElementById('pers_cont_prov').value = pers_cont_prov;
+                                        document.getElementById('correo_cont_prov').value = correo_cont_prov;
                                         $('#exampleModalEditar').modal('show');
                                     }
 
                                     function guardarEdicion() {
-                                        var id = document.getElementById('idInput').value;
-                                        var nombre = document.getElementById('nombreInput').value;
-                                        alert("ID: " + id); // Mostrar el valor de "id"
-                                        alert("Nombre: " + nombre); // Mostrar el valor de "id   
-                                        window.location.href = 'CLeditar.htm?id=' + id + '&nombre=' + nombre;
+                                        var id_prov = document.getElementById('id_prov').value;
+                                        var nom_prov = document.getElementById('nom_prov').value;
+                                        var num_cont_prov = document.getElementById('num_cont_prov').value;
+                                        var fecha_creac_prov = document.getElementById('fecha_creac_prov').value;
+                                        var pers_cont_prov = document.getElementById('pers_cont_prov').value;
+                                        var correo_cont_prov = document.getElementById('correo_cont_prov').value;
+
+                                        window.location.href = 'editarProveedor.htm?id_prov=' + id_prov + '&nom_prov=' + nom_prov + '&num_cont_prov=' + num_cont_prov + '&fecha_creac_prov=' + fecha_creac_prov + '&pers_cont_prov=' + pers_cont_prov + '&correo_cont_prov=' + correo_cont_prov;
                                     }
                                 </script>
 
                             </div>
+
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -307,28 +351,28 @@
                                                 <th>Persona_Contacto</th>
                                                 <th>Correo_Contacto</th>
                                                 <th>Accion</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <c:forEach var="dato" items="${lista}">
                                                 <tr>
-                                                    <td>${dato.Id_prov}</td>
-                                                    <td>${dato.Nom_prov}</td>
-                                                    <td>${dato.Num_cont_prov}</td>
-                                                    <td>${dato.Fecha_creac_prov}</td>
-                                                    <td>${dato.Pers_cont_prov}</td>
-                                                    <td>${dato.Correo_cont_prov}</td>
+                                                    <td>${dato.id_prov}</td>
+                                                    <td>${dato.nom_prov}</td>
+                                                    <td>${dato.num_cont_prov}</td>
+                                                    <td>${dato.fecha_creac_prov}</td>
+                                                    <td>${dato.pers_cont_prov}</td>
+                                                    <td>${dato.correo_cont_prov}</td>
                                                     <td>
-                                                        <button type="button" class="btn btn-primary" onclick="abrirModalEditar('${dato.Id_categ}', '${dato.Nombre_categ}')">
+                                                        <button type="button" class="btn btn-primary" onclick="abrirModalEditar(${dato.id_prov}, '${dato.nom_prov}', '${dato.num_cont_prov}', '${dato.fecha_creac_prov}', '${dato.pers_cont_prov}', '${dato.correo_cont_prov}')">
                                                             <i class="fa fa-sm text-white-50"></i> Editar
                                                         </button>  
-                                                        <a href="CLdelete.htm?id=${dato.Id_categ}" class="btn btn-warning">Eliminar</a>
+                                                        <a href="deleteProveedor.htm?id=${dato.id_prov}" class="btn btn-warning">Eliminar</a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
                                     </table>
+
                                 </div>
                             </div>
                         </div>
@@ -367,7 +411,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Bootstrap core JavaScript-->
         <script src="Resources/vendor/jquery/jquery.min.js"></script>
         <script src="Resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

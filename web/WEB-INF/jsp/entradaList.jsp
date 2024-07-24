@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
 
@@ -9,19 +10,19 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>TRIATHLON</title>
+        <title>Categorias de Productos</title>
 
         <!-- Custom fonts for this template -->
-        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="Resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="Resources/css/sb-admin-2.min.css" rel="stylesheet">
 
         <!-- Custom styles for this page -->
-        <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <link href="Resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     </head>
 
@@ -34,31 +35,30 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.htm">
                     <div class="sidebar-brand-icon ">
-                        <img src="img/logo.png" weight="26px" height="12px" alt="alt"/>
+                        <img src="Resources/img/logo.png" weight="52px" height="24px" alt="alt"/>
                     </div>
                 </a>
-
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="../index.jsp">
+                    <a class="nav-link" href="index.htm">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="productosList.jsp">
+                    <a class="nav-link" href="productosList.htm">
                         <i class="fas fa-box"></i>
                         <span>Productos</span></a>
                 </li>
-                
+
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="proveedoresList.jsp">
+                    <a class="nav-link collapsed" href="proveedoresList.htm">
                         <i class="fas fa-handshake"></i>
                         <span>Proveedores</span>
                     </a>
@@ -66,7 +66,7 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="stocksList.jsp">
+                    <a class="nav-link collapsed" href="stocksList.htm">
                         <i class="fas fa-warehouse"></i>
                         <span>Stock</span>
                     </a>
@@ -74,28 +74,28 @@
 
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="categoriaList.jsp">
+                    <a class="nav-link collapsed" href="categoriaList.htm">
                         <i class="fas fa-tags "></i>
                         <span>Categoria</span>
                     </a>
                 </li>
-                
+
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item active">
-                    <a class="nav-link collapsed" href="entradaList.jsp">
+                    <a class="nav-link collapsed" href="entradaList.htm">
                         <i class="fas fa-arrow-right"></i>
                         <span>Entrada</span>
                     </a>
                 </li>
-                
+
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="salidaList.jsp">
+                    <a class="nav-link collapsed" href="salidaList.htm">
                         <i class="fas fa-arrow-left"></i>
                         <span>Salida</span>
                     </a>
                 </li>
-                
+
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
@@ -111,7 +111,7 @@
                         <i class="fas fa-users fa-table"></i>
                         <span>Usuarios</span></a>
                 </li>
-                
+
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
                     <a class="nav-link" href="reporteList.jsp">
@@ -204,19 +204,19 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header d-sm-flex align-items-center justify-content-between mb-4">
-                                <h6 class="m-0 font-weight-bold text-gray-800">Entradas</h6>
+                                <h6 class="m-0 font-weight-bold text-gray-800">Lista de Categorias de Productos</h6>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalGuardar">
                                     <i
                                         class="fa fa-plus fa-sm text-white-50"></i> Nuevo
                                 </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <!-- Modal para guardar -->
+                                <div class="modal fade" id="exampleModalGuardar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus fa-sm text-black-50"></i> Agregar Entrada</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus fa-sm text-black-50"></i> Agregar Categoria</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -227,33 +227,10 @@
                                                         <div class="col-12">
                                                             <form>
                                                                 <p>
-                                                                    <label for="exampleFormControlInput1">Producto:</label>
+                                                                    <label for="exampleFormControlInput1">Nombre:</label>
                                                                     <input type="text" class="form-control" name="">
                                                                 </p>
-                                                                <p>
-                                                                    <label for="exampleFormControlTextarea1">Proveedor:</label>
-                                                                    <input type="text" class="form-control" name="">
-                                                                </p>
-                                                                <p>
-                                                                    <label for="exampleFormControlInput1">Cantidad:</label>
-                                                                    <input type="text" class="form-control" name="">
-                                                                </p>
-                                                                <p>
-                                                                    <label for="exampleFormControlInput1">Precio de Compra:</label>
-                                                                    <input type="text" class="form-control" name="">
-                                                                </p>
-                                                                <p>
-                                                                    <label for="exampleFormControlInput1">Precio de Venta:</label>
-                                                                    <input type="text" class="form-control" name="">
-                                                                </p>
-                                                                <p>
-                                                                    <label for="exampleFormControlInput1">Entregada por:</label>
-                                                                    <input type="text" class="form-control" name="">
-                                                                </p>
-                                                                <p>
-                                                                    <label for="exampleFormControlInput1">Fecha de Entrada:</label>
-                                                                    <input type="text" class="form-control" name="">
-                                                                </p>
+
                                                             </form>
                                                         </div>
                                                     </div>
@@ -261,12 +238,61 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                <button type="button" class="btn btn-primary">Guardar</button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+                                <!-- Modal para editar -->
+                                <div class="modal fade" id="exampleModalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-plus fa-sm text-black-50"></i> Editar Categoria</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <form id="editForm">
+                                                                <p>
+                                                                    <label for="nombreInput">Nombre:</label>
+                                                                    <input type="text" id="nombreInput" name="nombre" class="form-control">
+                                                                </p>
+                                                                <input type="hidden" id="idInput" name="id">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="btn btn-primary" onclick="guardarEdicion()">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function abrirModalEditar(id_categ, nombre_categ) {
+                                        document.getElementById('idInput').value = id_categ;
+                                        document.getElementById('nombreInput').value = nombre_categ;
+
+                                        $('#exampleModalEditar').modal('show');
+                                    }
+
+                                    function guardarEdicion() {
+                                        var id_categ = document.getElementById('idInput').value;
+                                        var nombre_categ = document.getElementById('nombreInput').value;
+                                        alert("ID: " + id_categ); // Mostrar el valor de "id"
+                                        alert("Nombre: " + nombre_categ); // Mostrar el valor de "id   
+                                        window.location.href = 'CLeditar.htm?id_categ=' + id_categ + '&nombre_categ=' + nombre_categ;
+                                    }
+                                </script>
 
                             </div>
                             <div class="card-body">
@@ -275,28 +301,24 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Producto:</th>
-                                                <th>Proveedor:</th>
-                                                <th>Cantidad:</th>
-                                                <th>Precio de Compra</th>
-                                                <th>Precio de Venta</th>
-                                                <th>Entregada por</th>
-                                                <th>Fecha de Entrada</th>
+                                                <th>Nombre</th>
                                                 <th>Accion</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
-                                                <td>45</td>
-                                            </tr>
-
+                                            <c:forEach var="dato" items="${lista}">
+                                                <tr>
+                                                    <td>${dato.Id_categ}</td>
+                                                    <td>${dato.Nombre_categ}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary" onclick="abrirModalEditar('${dato.Id_categ}', '${dato.Nombre_categ}')">
+                                                            <i class="fa fa-sm text-white-50"></i> Editar
+                                                        </button>  
+                                                        <a href="CLdelete.htm?id_categ=${dato.Id_categ}" class="btn btn-warning">Eliminar</a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -339,21 +361,21 @@
         </div>
 
         <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="Resources/vendor/jquery/jquery.min.js"></script>
+        <script src="Resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="Resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+        <script src="Resources/js/sb-admin-2.min.js"></script>
 
         <!-- Page level plugins -->
-        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="Resources/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="Resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
         <!-- Page level custom scripts -->
-        <script src="js/demo/datatables-demo.js"></script>
+        <script src="Resources/js/demo/datatables-demo.js"></script>
 
     </body>
 </html>

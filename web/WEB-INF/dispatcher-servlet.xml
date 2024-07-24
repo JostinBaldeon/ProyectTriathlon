@@ -17,18 +17,35 @@
         <property name="mappings">
             <props>
                 <prop key="index.htm">controlador</prop>
-                <prop key="categoriaList.htm">controlador</prop>
-                <prop key="entradaList.htm">controlador</prop>
+                
                 <prop key="login.htm">controlador</prop>
+                
                 <prop key="productosList.htm">controlador</prop>
+                <prop key="agregarProducto.htm">controlador</prop>       
+                <prop key="editarProducto.htm">controlador</prop>    
+                <prop key="deleteProducto.htm">controlador</prop>
+                
                 <prop key="proveedoresList.htm">controlador</prop>
-                <prop key="reporteList.htm">controlador</prop>
-                <prop key="salidaList.htm">controlador</prop>
+                <prop key="agregarProveedor.htm">controlador</prop>       
+                <prop key="editarProveedor.htm">controlador</prop>    
+                <prop key="deleteProveedor.htm">controlador</prop>
+                
                 <prop key="stocksList.htm">controlador</prop>
+                
+                <prop key="categoriaList.htm">controlador</prop>
+                <prop key="agregarCategoria.htm">controlador</prop>       
+                <prop key="editarCategoria.htm">controlador</prop>    
+                <prop key="deleteCategoria.htm">controlador</prop>
+                
+                <prop key="entradaList.htm">controlador</prop>
+                
+                <prop key="salidaList.htm">controlador</prop>
+                
                 <prop key="usuariosList.htm">controlador</prop>
-                <prop key="CLdelete.htm">controlador</prop>
-                <prop key="CLeditar.htm">controlador</prop>
-                <prop key="CLagregar.htm">controlador</prop>
+                <prop key="reporteList.htm">controlador</prop>    
+                
+                
+                
             </props>
         </property>
     </bean>

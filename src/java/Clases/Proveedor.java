@@ -6,14 +6,14 @@ public class Proveedor {
     private int id_prov;
     private String nom_prov;
     private String num_cont_prov;
-    private java.sql.Date fecha_creac_prov;
-    private String  pers_cont_prov;
+    private Date fecha_creac_prov;
+    private String pers_cont_prov;
     private String correo_cont_prov;
 
     public Proveedor() {
     }
 
-    public Proveedor(int id_prov, String nom_prov, String num_cont_prov, java.sql.Date fecha_creac_prov, String pers_cont_prov, String correo_cont_prov) {
+    public Proveedor(int id_prov, String nom_prov, String num_cont_prov, Date fecha_creac_prov, String pers_cont_prov, String correo_cont_prov) {
         this.id_prov = id_prov;
         this.nom_prov = nom_prov;
         this.num_cont_prov = num_cont_prov;
@@ -50,7 +50,7 @@ public class Proveedor {
         return fecha_creac_prov;
     }
 
-    public void setFecha_creac_prov(java.sql.Date fecha_creac_prov) {
+    public void setFecha_creac_prov(Date fecha_creac_prov) {
         this.fecha_creac_prov = fecha_creac_prov;
     }
 

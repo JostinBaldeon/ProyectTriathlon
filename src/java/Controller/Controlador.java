@@ -17,11 +17,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.portlet.ModelAndView; //no sirve
-import org.springframework.web.servlet.ModelAndView; //ojooo
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class Controlador {
@@ -29,231 +27,340 @@ public class Controlador {
     private CategoriaDao catedao = new CategoriaDaoimpl();
     private ProveedorDao provdao = new ProveedorDaoimpl();
     private ProductoDao proddao = new ProductoDaoimpl();
-    int id;
-    List datos;
     
-    Conexion con = new Conexion();
-    JdbcTemplate jdbcTemplate = new JdbcTemplate(con.Conectar());
-    ModelAndView mav = new ModelAndView();
+    private Conexion con = new Conexion();
+    private JdbcTemplate jdbcTemplate;
+    
+    // Constructor para inicializar JdbcTemplate
+    public Controlador() {
+        try {
+            this.jdbcTemplate = new JdbcTemplate(con.Conectar());
+            System.out.println("JdbcTemplate inicializado correctamente");
+        } catch (Exception e) {
+            System.err.println("Error inicializando JdbcTemplate: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     @RequestMapping("index.htm")
     public ModelAndView Ver() {
+        ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
         return mav;
     }
     
-    ///productos
+    // PRODUCTOS
     @RequestMapping(value = "productosList.htm", method = RequestMethod.GET)
     public ModelAndView redirectToVistaproductoList() {
-        String sql = "select * from producto";
-        List datos = this.jdbcTemplate.queryForList(sql);
-        mav.addObject("lista", datos);
-        mav.setViewName("productosList");
+        ModelAndView mav = new ModelAndView();
+        try {
+            String sql = "SELECT * FROM producto";
+            List datos = this.jdbcTemplate.queryForList(sql);
+            mav.addObject("lista", datos);
+            mav.setViewName("productosList");
+            System.out.println("Productos cargados: " + datos.size());
+        } catch (Exception e) {
+            System.err.println("Error cargando productos: " + e.getMessage());
+            e.printStackTrace();
+            mav.addObject("error", "Error cargando productos: " + e.getMessage());
+            mav.setViewName("error");
+        }
         return mav;
     }
     
-    // productos - Botón Agregar
     @RequestMapping(value = "agregarProducto.htm")
     public ModelAndView agregarProducto(HttpServletRequest request) {
-        String nomb_prod = request.getParameter("nomb_prod");
-        String genero_prod = request.getParameter("genero_prod");
-        String talla_prod = request.getParameter("talla_prod");
-        String descr_prod = request.getParameter("descr_prod");
-        String nom_prov = request.getParameter("nom_prov");
-        String nombre_categ = request.getParameter("nombre_categ");
+        try {
+            String nomb_prod = request.getParameter("nomb_prod");
+            String genero_prod = request.getParameter("genero_prod");
+            String talla_prod = request.getParameter("talla_prod");
+            String descr_prod = request.getParameter("descr_prod");
+            String nom_prov = request.getParameter("nom_prov");
+            String nombre_categ = request.getParameter("nombre_categ");
 
-        proddao.agregar(new Producto(0, nomb_prod, genero_prod, talla_prod, descr_prod, nom_prov, nombre_categ));
+            proddao.agregar(new Producto(0, nomb_prod, genero_prod, talla_prod, descr_prod, nom_prov, nombre_categ));
+            System.out.println("Producto agregado correctamente");
+        } catch (Exception e) {
+            System.err.println("Error agregando producto: " + e.getMessage());
+            e.printStackTrace();
+        }
         return new ModelAndView("redirect:/productosList.htm");
     }
     
-    // productos - Botón Eliminar
     @RequestMapping(value = "deleteProducto.htm")
     public ModelAndView deleteProducto(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        proddao.eliminar(id);
-        proddao.reiniciarAutoIncrement(id);
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            proddao.eliminar(id);
+            proddao.reiniciarAutoIncrement(id);
+            System.out.println("Producto eliminado correctamente: " + id);
+        } catch (Exception e) {
+            System.err.println("Error eliminando producto: " + e.getMessage());
+            e.printStackTrace();
+        }
         return new ModelAndView("redirect:/productosList.htm");
     }
     
-    // productos - Botón Editar
     @RequestMapping(value = "editarProducto.htm")
     public ModelAndView editarProducto(HttpServletRequest request) {
-        int id_prod = Integer.parseInt(request.getParameter("id_prod"));
-        String nomb_prod = request.getParameter("nomb_prod");
-        String genero_prod = request.getParameter("genero_prod");
-        String talla_prod = request.getParameter("talla_prod");
-        String descr_prod = request.getParameter("descr_prod");
-        String nom_prov = request.getParameter("nom_prov");
-        String nombre_categ = request.getParameter("nombre_categ");
+        try {
+            int id_prod = Integer.parseInt(request.getParameter("id_prod"));
+            String nomb_prod = request.getParameter("nomb_prod");
+            String genero_prod = request.getParameter("genero_prod");
+            String talla_prod = request.getParameter("talla_prod");
+            String descr_prod = request.getParameter("descr_prod");
+            String nom_prov = request.getParameter("nom_prov");
+            String nombre_categ = request.getParameter("nombre_categ");
 
-        Producto prod = new Producto();
-        prod.setId_prod(id_prod);
-        prod.setNomb_prod(nomb_prod);
-        prod.setGenero_prod(genero_prod);
-        prod.setTalla_prod(talla_prod);  
-        prod.setDescr_prod(descr_prod);
-        prod.setNom_prov(nom_prov);
-        prod.setNombre_categ(nombre_categ);
+            Producto prod = new Producto();
+            prod.setId_prod(id_prod);
+            prod.setNomb_prod(nomb_prod);
+            prod.setGenero_prod(genero_prod);
+            prod.setTalla_prod(talla_prod);  
+            prod.setDescr_prod(descr_prod);
+            prod.setNom_prov(nom_prov);
+            prod.setNombre_categ(nombre_categ);
 
-        proddao.editar(prod);
+            proddao.editar(prod);
+            System.out.println("Producto editado correctamente: " + id_prod);
+        } catch (Exception e) {
+            System.err.println("Error editando producto: " + e.getMessage());
+            e.printStackTrace();
+        }
         return new ModelAndView("redirect:/productosList.htm");
     }
     
-    ///proveedor
+    // PROVEEDORES
     @RequestMapping(value = "proveedoresList.htm", method = RequestMethod.GET)
     public ModelAndView redirectToVistaproveedorList() {
-        String sql = "select * from proveedor";
-        List datos = this.jdbcTemplate.queryForList(sql);
-        mav.addObject("lista", datos);
-        mav.setViewName("proveedoresList");
+        ModelAndView mav = new ModelAndView();
+        try {
+            String sql = "SELECT * FROM proveedor";
+            List datos = this.jdbcTemplate.queryForList(sql);
+            mav.addObject("lista", datos);
+            mav.setViewName("proveedoresList");
+            System.out.println("Proveedores cargados: " + datos.size());
+        } catch (Exception e) {
+            System.err.println("Error cargando proveedores: " + e.getMessage());
+            e.printStackTrace();
+            mav.addObject("error", "Error cargando proveedores: " + e.getMessage());
+            mav.setViewName("error");
+        }
         return mav;
     }
     
-    // Proveedor - Botón Agregar
     @RequestMapping(value = "agregarProveedor.htm")
     public ModelAndView agregarProveedor(HttpServletRequest request) {
-        String nom_prov = request.getParameter("nom_prov");
-        String num_cont_prov = request.getParameter("num_cont_prov");
-        String fecha_creac_provStr = request.getParameter("fecha_creac_prov");
-        String pers_cont_prov = request.getParameter("pers_cont_prov");
-        String correo_cont_prov = request.getParameter("correo_cont_prov");
-        
-        Date fecha_creac_prov = null;
-    try {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Usa el formato que corresponda a tus datos
-        fecha_creac_prov = sdf.parse(fecha_creac_provStr);
-    } catch (ParseException e) {
-        e.printStackTrace();
-        // Maneja el error de conversión de fecha aquí
-    }
+        try {
+            String nom_prov = request.getParameter("nom_prov");
+            String num_cont_prov = request.getParameter("num_cont_prov");
+            String fecha_creac_provStr = request.getParameter("fecha_creac_prov");
+            String pers_cont_prov = request.getParameter("pers_cont_prov");
+            String correo_cont_prov = request.getParameter("correo_cont_prov");
+            
+            Date fecha_creac_prov = null;
+            if (fecha_creac_provStr != null && !fecha_creac_provStr.isEmpty()) {
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    fecha_creac_prov = sdf.parse(fecha_creac_provStr);
+                } catch (ParseException e) {
+                    System.err.println("Error parseando fecha: " + e.getMessage());
+                    fecha_creac_prov = new Date(); // Usar fecha actual como fallback
+                }
+            } else {
+                fecha_creac_prov = new Date(); // Usar fecha actual si no se proporciona
+            }
 
-        provdao.agregar(new Proveedor(0,nom_prov,num_cont_prov,fecha_creac_prov,pers_cont_prov,correo_cont_prov)); 
+            provdao.agregar(new Proveedor(0, nom_prov, num_cont_prov, fecha_creac_prov, pers_cont_prov, correo_cont_prov));
+            System.out.println("Proveedor agregado correctamente");
+        } catch (Exception e) {
+            System.err.println("Error agregando proveedor: " + e.getMessage());
+            e.printStackTrace();
+        }
         return new ModelAndView("redirect:/proveedoresList.htm");
     }
     
-    // Proveedor - Botón Eliminar
     @RequestMapping(value = "deleteProveedor.htm")
     public ModelAndView deleteProveedor(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        provdao.eliminar(id);
-        provdao.reiniciarAutoIncrement(id);
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            provdao.eliminar(id);
+            provdao.reiniciarAutoIncrement(id);
+            System.out.println("Proveedor eliminado correctamente: " + id);
+        } catch (Exception e) {
+            System.err.println("Error eliminando proveedor: " + e.getMessage());
+            e.printStackTrace();
+        }
         return new ModelAndView("redirect:/proveedoresList.htm");
     }
     
-    // Proveedor - Botón Editar
     @RequestMapping(value = "editarProveedor.htm")
     public ModelAndView editarProveedor(HttpServletRequest request) {
-        int id_prov = Integer.parseInt(request.getParameter("id_prov"));
-        String nom_prov = request.getParameter("nom_prov");
-        String num_cont_prov = request.getParameter("num_cont_prov");
-        String fecha_creac_provStr = request.getParameter("fecha_creac_prov");
-        String pers_cont_prov = request.getParameter("pers_cont_prov");
-        String correo_cont_prov = request.getParameter("correo_cont_prov");
-        
-        Date fecha_creac_prov = null;
-    try {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Usa el formato que corresponda a tus datos
-        fecha_creac_prov = sdf.parse(fecha_creac_provStr);
-    } catch (ParseException e) {
-        e.printStackTrace();
-        // Maneja el error de conversión de fecha aquí
-    }
+        try {
+            int id_prov = Integer.parseInt(request.getParameter("id_prov"));
+            String nom_prov = request.getParameter("nom_prov");
+            String num_cont_prov = request.getParameter("num_cont_prov");
+            String fecha_creac_provStr = request.getParameter("fecha_creac_prov");
+            String pers_cont_prov = request.getParameter("pers_cont_prov");
+            String correo_cont_prov = request.getParameter("correo_cont_prov");
+            
+            Date fecha_creac_prov = null;
+            if (fecha_creac_provStr != null && !fecha_creac_provStr.isEmpty()) {
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    fecha_creac_prov = sdf.parse(fecha_creac_provStr);
+                } catch (ParseException e) {
+                    System.err.println("Error parseando fecha: " + e.getMessage());
+                    fecha_creac_prov = new Date();
+                }
+            } else {
+                fecha_creac_prov = new Date();
+            }
 
-        Proveedor p = new Proveedor();
-        p.setId_prov(id_prov);
-        p.setNom_prov(nom_prov);
-        p.setNum_cont_prov(num_cont_prov);
-        p.setFecha_creac_prov(fecha_creac_prov);  
-        p.setPers_cont_prov(pers_cont_prov);
-        p.setCorreo_cont_prov(correo_cont_prov);
+            Proveedor p = new Proveedor();
+            p.setId_prov(id_prov);
+            p.setNom_prov(nom_prov);
+            p.setNum_cont_prov(num_cont_prov);
+            p.setFecha_creac_prov(fecha_creac_prov);  
+            p.setPers_cont_prov(pers_cont_prov);
+            p.setCorreo_cont_prov(correo_cont_prov);
 
-        provdao.editar(p);
+            provdao.editar(p);
+            System.out.println("Proveedor editado correctamente: " + id_prov);
+        } catch (Exception e) {
+            System.err.println("Error editando proveedor: " + e.getMessage());
+            e.printStackTrace();
+        }
         return new ModelAndView("redirect:/proveedoresList.htm");
     }
     
-    ///stock
-    @RequestMapping(value = "stocksList.htm", method = RequestMethod.GET)
-    public ModelAndView redirectToVistastocksList() {
-        String sql = "select * from stocks";
-        List datos = this.jdbcTemplate.queryForList(sql);
-        mav.addObject("lista", datos);
-        mav.setViewName("stocksList");
-        return mav;
-    }
-    
-    ///categoria
+    // CATEGORÍAS
     @RequestMapping(value = "categoriaList.htm", method = RequestMethod.GET)
     public ModelAndView redirectToVistacategoriaList() {
-        String sql = "select * from categoria";
-        List datos = this.jdbcTemplate.queryForList(sql);
-        mav.addObject("lista", datos);
-        mav.setViewName("categoriaList");
+        ModelAndView mav = new ModelAndView();
+        try {
+            String sql = "SELECT * FROM categoria";
+            List datos = this.jdbcTemplate.queryForList(sql);
+            mav.addObject("lista", datos);
+            mav.setViewName("categoriaList");
+            System.out.println("Categorías cargadas: " + datos.size());
+        } catch (Exception e) {
+            System.err.println("Error cargando categorías: " + e.getMessage());
+            e.printStackTrace();
+            mav.addObject("error", "Error cargando categorías: " + e.getMessage());
+            mav.setViewName("error");
+        }
         return mav;
     }
     
-    // Categoria - Botón Agregar
     @RequestMapping(value = "agregarCategoria.htm")
     public ModelAndView agregarCategoria(HttpServletRequest request) {
-        String nombre_categ = request.getParameter("nombre_categ");      
-
-        catedao.agregar(new Categorias(0,nombre_categ)); 
+        try {
+            String nombre_categ = request.getParameter("nombre_categ");      
+            catedao.agregar(new Categorias(0, nombre_categ));
+            System.out.println("Categoría agregada correctamente");
+        } catch (Exception e) {
+            System.err.println("Error agregando categoría: " + e.getMessage());
+            e.printStackTrace();
+        }
         return new ModelAndView("redirect:/categoriaList.htm");
     }
     
-    // Categoria - Botón Eliminar
     @RequestMapping(value = "deleteCategoria.htm")
     public ModelAndView deleteCategoria(HttpServletRequest request) {
-        int id = Integer.parseInt(request.getParameter("id"));
-        catedao.eliminar(id);
-        catedao.reiniciarAutoIncrement(id);
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            catedao.eliminar(id);
+            catedao.reiniciarAutoIncrement(id);
+            System.out.println("Categoría eliminada correctamente: " + id);
+        } catch (Exception e) {
+            System.err.println("Error eliminando categoría: " + e.getMessage());
+            e.printStackTrace();
+        }
         return new ModelAndView("redirect:/categoriaList.htm");
     }
     
-    // Categoria - Botón Editar
     @RequestMapping(value = "editarCategoria.htm")
     public ModelAndView editarCategoria(HttpServletRequest request) {
-        int id_prov = Integer.parseInt(request.getParameter("id_prov"));
-        String nom_prov = request.getParameter("nom_prov");      
+        try {
+            int id_categ = Integer.parseInt(request.getParameter("id_categ"));
+            String nombre_categ = request.getParameter("nombre_categ");      
 
-        Proveedor p = new Proveedor();
-        p.setId_prov(id_prov);
-        p.setNom_prov(nom_prov);
+            Categorias cat = new Categorias();
+            cat.setId_categ(id_categ);
+            cat.setNombre_categ(nombre_categ);
 
-        provdao.editar(p);
+            catedao.editar(cat);
+            System.out.println("Categoría editada correctamente: " + id_categ);
+        } catch (Exception e) {
+            System.err.println("Error editando categoría: " + e.getMessage());
+            e.printStackTrace();
+        }
         return new ModelAndView("redirect:/categoriaList.htm");
     }
     
-    ///entrada
+    // OTROS LISTADOS
+    @RequestMapping(value = "stocksList.htm", method = RequestMethod.GET)
+    public ModelAndView redirectToVistastocksList() {
+        ModelAndView mav = new ModelAndView();
+        try {
+            String sql = "SELECT * FROM stocks";
+            List datos = this.jdbcTemplate.queryForList(sql);
+            mav.addObject("lista", datos);
+            mav.setViewName("stocksList");
+        } catch (Exception e) {
+            System.err.println("Error cargando stocks: " + e.getMessage());
+            mav.addObject("error", "Error cargando stocks: " + e.getMessage());
+            mav.setViewName("error");
+        }
+        return mav;
+    }
+    
     @RequestMapping(value = "entradaList.htm", method = RequestMethod.GET)
     public ModelAndView redirectToVistaentradaList() {
-        String sql = "select * from entrada";
-        List datos = this.jdbcTemplate.queryForList(sql);
-        mav.addObject("lista", datos);
-        mav.setViewName("entradaList");
+        ModelAndView mav = new ModelAndView();
+        try {
+            String sql = "SELECT * FROM entrada";
+            List datos = this.jdbcTemplate.queryForList(sql);
+            mav.addObject("lista", datos);
+            mav.setViewName("entradaList");
+        } catch (Exception e) {
+            System.err.println("Error cargando entradas: " + e.getMessage());
+            mav.addObject("error", "Error cargando entradas: " + e.getMessage());
+            mav.setViewName("error");
+        }
         return mav;
     }
     
-    ///salida
     @RequestMapping(value = "salidaList.htm", method = RequestMethod.GET)
     public ModelAndView redirectToVistasalidaList() {
-        String sql = "select * from salida";
-        List datos = this.jdbcTemplate.queryForList(sql);
-        mav.addObject("lista", datos);
-        mav.setViewName("salidaList");
+        ModelAndView mav = new ModelAndView();
+        try {
+            String sql = "SELECT * FROM salida";
+            List datos = this.jdbcTemplate.queryForList(sql);
+            mav.addObject("lista", datos);
+            mav.setViewName("salidaList");
+        } catch (Exception e) {
+            System.err.println("Error cargando salidas: " + e.getMessage());
+            mav.addObject("error", "Error cargando salidas: " + e.getMessage());
+            mav.setViewName("error");
+        }
         return mav;
     }
-    
-    
-    
-    
-    
-    
 
     @RequestMapping(value = "login.htm", method = RequestMethod.GET)
     public ModelAndView redirectToLogin() {
+        ModelAndView mav = new ModelAndView();
         mav.setViewName("login");
         return mav;
     }
-
-
+    
+    @RequestMapping(value = "testConexion.htm")
+public ModelAndView testConexion() {
+    ModelAndView mav = new ModelAndView();
+    boolean conexionOk = Conexion.probarConexion();
+    mav.addObject("mensaje", conexionOk ? "Conexión exitosa" : "Error de conexión");
+    mav.setViewName("test");
+    return mav;
+}
 }
